@@ -1,0 +1,55 @@
+{
+  "name": "resume-agent",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "对话式简历 Agent：TypeScript + DeepSeek Harness 运行时 + MCP 工具 + Langfuse 可观测",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c cyan,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run build:mcp && tsx watch server/src/index.ts",
+    "dev:web": "vite --config web/vite.config.ts",
+    "build:mcp": "node scripts/build-mcp.mjs",
+    "langfuse:check": "node scripts/check-langfuse.mjs",
+    "build": "npm run build:mcp && vite build --config web/vite.config.ts",
+    "start": "npm run build:mcp && tsx server/src/index.ts",
+    "typecheck": "tsc --noEmit && tsc -p web/tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh-sdk-client": "0.0.1-rc.1",
+    "@langfuse/otel": "^6.1.1",
+    "@langfuse/tracing": "^6.1.1",
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/sdk-node": "^0.206.0",
+    "express": "^5.1.0",
+    "mammoth": "^1.10.0",
+    "marked": "^16.4.2",
+    "multer": "^2.0.2",
+    "mupdf": "^1.28.6",
+    "puppeteer-core": "^24.25.0",
+    "unpdf": "^1.4.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.25.11",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9",
+    "vitest": "^3.2.4"
+  }
+}

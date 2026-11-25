@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.env
+.runtime/
+workspace/
+data/
+web/dist/
+*.log
+.DS_Store
